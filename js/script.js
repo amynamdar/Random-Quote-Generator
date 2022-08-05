@@ -11,30 +11,6 @@ project 1 - A Random Quote Generator
  * `quotes` array 
 ***/
 
-
-
-/***
- * `getRandomQuote` function
-***/
-
-
-
-/***
- * `printQuote` function
-***/
-
-
-
-/***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
-***/
-
-//document.getElementById('load-quote').addEventListener("click", printQuote, false);
-console.log("Testing: 1-2-3! The script is connected to the HTML!");
-
-// Array of quotes
-
 quotes = [
   {
     quote:"Double, double toil and trouble; Fire burn and caldron bubble.",
@@ -68,3 +44,32 @@ quotes = [
     year: "2003"
   }
 ];
+
+/***
+ * `getRandomQuote` function
+***/
+
+function getRandomQuote(quotes){
+  let randomQuoteNumber = Math.floor(Math.random()*(quotes.length));
+  let randomQuote = quotes[randomQuoteNumber]
+  //console.log(`The random quote number is ${randomQuoteNumber}. The quote with that index is "${randomQuote.quote} by ${quotes[randomQuoteNumber].source}, ${randomQuote.citation}, ${randomQuote.year}"`);
+  return randomQuote;
+}
+
+console.log(getRandomQuote(quotes));
+
+
+/***
+ * `printQuote` function
+***/
+
+
+
+/***
+ * click event listener for the print quote button
+ * DO NOT CHANGE THE CODE BELOW!!
+***/
+
+//document.getElementById('load-quote').addEventListener("click", printQuote, false);
+//console.log("Testing: 1-2-3! The script is connected to the HTML!");
+
