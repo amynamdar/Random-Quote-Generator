@@ -11,7 +11,7 @@ project 1 - A Random Quote Generator
  * `quotes` array 
 ***/
 
-quotes = [
+const quotes = [
   {
     quote:"Double, double toil and trouble; Fire burn and caldron bubble.",
     source:"William Shakespeare",
@@ -51,25 +51,51 @@ quotes = [
 
 function getRandomQuote(quotes){
   let randomQuoteNumber = Math.floor(Math.random()*(quotes.length));
-  let randomQuote = quotes[randomQuoteNumber]
-  //console.log(`The random quote number is ${randomQuoteNumber}. The quote with that index is "${randomQuote.quote} by ${quotes[randomQuoteNumber].source}, ${randomQuote.citation}, ${randomQuote.year}"`);
+  let randomQuote = quotes[randomQuoteNumber];
+  console.log(`The random quote number is ${randomQuoteNumber}. The quote with that index is "${randomQuote.quote} by ${quotes[randomQuoteNumber].source}, ${randomQuote.citation}, ${randomQuote.year}"`);
   return randomQuote;
 }
 
-console.log(getRandomQuote(quotes));
+// console.log(getRandomQuote(quotes));
 
 
 /***
  * `printQuote` function
 ***/
 
+function printQuote(quotes){
+let randomQuote = getRandomQuote(quotes);
+//console.log(randomQuote);
 
+let quoteHTML = `<p class="quote">${randomQuote.quote}</p>
+<p class="source">${randomQuote.source}`;
+
+
+
+if(randomQuote.citation != ""){
+ console.log("has a citation");
+ let citationHTML = `<span class="citation">${randomQuote.citation}</span>`;
+ quoteHTML+= citationHTML;
+}
+
+if(randomQuote.year != ""){
+  console.log("has a year");
+  let yearHTML = `<span class="year">${randomQuote.year}</span>`;
+  quoteHTML += yearHTML;
+}
+
+quoteHTML += "</p>"
+console.table(quoteHTML);
+
+document.getElementById('quote-box').innerHTML = quoteHTML;
+}
+
+printQuote(quotes);
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
-
 //document.getElementById('load-quote').addEventListener("click", printQuote, false);
 //console.log("Testing: 1-2-3! The script is connected to the HTML!");
 
