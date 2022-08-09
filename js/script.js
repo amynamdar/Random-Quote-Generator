@@ -1,101 +1,125 @@
 /******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
+Treehouse FSJS Techdegree Project 1 - A Random Quote Generator
+Author: Amy Namdar
 ******************************************/
-
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
 /*** 
  * `quotes` array 
+ * 
+ * Array which holds quotes objects containing properties quote, source, citation, and year
+ *
 ***/
 
 const quotes = [
   {
-    quote:"Double, double toil and trouble; Fire burn and caldron bubble.",
-    source:"William Shakespeare",
-    citation:" Macbeth: Song of the Witches",
-    year: "1623"
+    quote: "Double, double toil and trouble; Fire burn and caldron bubble.",
+    source: "William Shakespeare",
+    citation: " Macbeth: Song of the Witches",
+    year: "1623",
+    tag: "witch"
 
   },
   {
-    quote:"Jack and Jill went up the hill, To fetch a pail of water; Jack fell down, and broke his crown. And Jill came tumbling after.",
-    source:"John Newbery",
-    citation:"Mother Goose's Melody",
-    year: "1765"
+    quote: "Jack and Jill went up the hill, To fetch a pail of water; Jack fell down, and broke his crown. And Jill came tumbling after.",
+    source: "John Newbery",
+    citation: "Mother Goose's Melody",
+    year: "1765",
+    tag: "rhyme"
   },
   {
-    quote:"Le doute est un état mental désagréable, mais la certitude est ridicule.",
-    source:"Voltaire",
-    citation:"Oeuvres Completes de Voltaire, Volume 12, Part 1",
-    year: "1817"
+    quote: "Le doute est un état mental désagréable, mais la certitude est ridicule.",
+    source: "Voltaire",
+    citation: "Oeuvres Completes de Voltaire, Volume 12, Part 1",
+    year: "1817",
+    tag: "french"
   },
   {
-    quote:"When the phone rang I was in the kitchen, boiling a potful of spaghetti and whistling along with an FM broadcast of the overture to Rossini's 'The Thieving Magpie,' which has to be the perfect music for cooking pasta.",
-    source:"Haruki Murakami",
-    citation:"The Wind-Up Bird Chronicle",
-    year: "1997"
+    quote: "When the phone rang I was in the kitchen, boiling a potful of spaghetti and whistling along with an FM broadcast of the overture to Rossini's 'The Thieving Magpie,' which has to be the perfect music for cooking pasta.",
+    source: "Haruki Murakami",
+    citation: "The Wind-Up Bird Chronicle",
+    year: "1997",
+    tag: "literary"
   },
   {
-    quote:"Toast cannot be explained by any rational means.",
-    source:"Margaret Atwood",
-    citation:"Oryx and Crake",
-    year: "2003"
+    quote: "Toast cannot be explained by any rational means.",
+    source: "Margaret Atwood",
+    citation: "Oryx and Crake",
+    year: "2003",
+    tag: "literary"
   }
 ];
 
 /***
  * `getRandomQuote` function
+ * Function which returns a random quote by generating a random number between 
+ * 1-4 and using it as the index of the item (quote) in the quotes array
 ***/
 
-function getRandomQuote(quotes){
-  let randomQuoteNumber = Math.floor(Math.random()*(quotes.length));
+function getRandomQuote() {
+  let randomQuoteNumber = Math.floor(Math.random() * (quotes.length));
   let randomQuote = quotes[randomQuoteNumber];
-  console.log(`The random quote number is ${randomQuoteNumber}. The quote with that index is "${randomQuote.quote} by ${quotes[randomQuoteNumber].source}, ${randomQuote.citation}, ${randomQuote.year}"`);
+ 
+  console.log(`The random quote number is ${randomQuoteNumber}. The quote with that index is "${randomQuote.quote} by ${quotes[randomQuoteNumber].source}, ${randomQuote.citation}, ${randomQuote.year}, ${randomQuote.tag}"`);
+ 
   return randomQuote;
 }
 
-// console.log(getRandomQuote(quotes));
-
-
 /***
  * `printQuote` function
+ * Function which generates HTML representation of the quote object and 
+ * inserts it into the quote-box element for display
 ***/
 
-function printQuote(quotes){
-let randomQuote = getRandomQuote(quotes);
-//console.log(randomQuote);
+function printQuote() {
+  let randomQuote = getRandomQuote(quotes);
 
-let quoteHTML = `<p class="quote">${randomQuote.quote}</p>
+  let quoteHTML = `<p class="quote">${randomQuote.quote}</p>
 <p class="source">${randomQuote.source}`;
 
+  if (randomQuote.citation != "") {
+    let citationHTML = `<span class="citation">${randomQuote.citation}</span>`;
+    quoteHTML += citationHTML;
+  }
 
+  if (randomQuote.year != "") {
+    let yearHTML = `<span class="year">${randomQuote.year}</span>`;
+    quoteHTML += yearHTML;
+  }
 
-if(randomQuote.citation != ""){
- console.log("has a citation");
- let citationHTML = `<span class="citation">${randomQuote.citation}</span>`;
- quoteHTML+= citationHTML;
-}
+  if (randomQuote.tag != "") {
+    console.log("has a tag");
+    
+     let tagHTML = `<span class="tag">${randomQuote.tag}</span>`;
+    quoteHTML += tagHTML;
+  }
 
-if(randomQuote.year != ""){
-  console.log("has a year");
-  let yearHTML = `<span class="year">${randomQuote.year}</span>`;
-  quoteHTML += yearHTML;
-}
-
-quoteHTML += "</p>"
-console.table(quoteHTML);
-
-document.getElementById('quote-box').innerHTML = quoteHTML;
+  quoteHTML += "</p>"
+  setRandomBackgroundColor();
+  document.getElementById('quote-box').innerHTML = quoteHTML;
+  
 }
 
 printQuote(quotes);
 
 /***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
+ * `setRandomBackgroundColor` function
+ * Function which updates the background color to a random color by updating the css 
+ * body background-color property with the randomly-generated background color
 ***/
-//document.getElementById('load-quote').addEventListener("click", printQuote, false);
-//console.log("Testing: 1-2-3! The script is connected to the HTML!");
+
+function setRandomBackgroundColor(){
+  
+  /***  Generate the random hexadecimal color code adapted from:
+  * Source: https://css-tricks.com/snippets/javascript/random-hex-color/
+  */
+  let randomHexColor = Math.floor(Math.random()*16777215).toString(16);
+ document.body.style.backgroundColor = `#${randomHexColor}`;
+  //console.log(document.body.style.background);
+}
+/***
+ * click event listener for the "Show another quote" button
+ * 
+***/
+
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
