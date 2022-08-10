@@ -55,27 +55,6 @@ const quotes = [
       citation: "A Coney Island of the Mind",
       year: "1958",
       tag: "poetry"
-  },
-  {
-    quote: "Le doute est un état mental désagréable, mais la certitude est ridicule.",
-    source: "Voltaire",
-    citation: "Oeuvres Completes de Voltaire, Volume 12, Part 1",
-    year: "1817",
-    tag: "french"
-  },
-  {
-    quote: "When the phone rang I was in the kitchen, boiling a potful of spaghetti and whistling along with an FM broadcast of the overture to Rossini's 'The Thieving Magpie,' which has to be the perfect music for cooking pasta.",
-    source: "Haruki Murakami",
-    citation: "The Wind-Up Bird Chronicle",
-    year: "1997",
-    tag: "literary"
-  },
-  {
-    quote: "Toast cannot be explained by any rational means.",
-    source: "Margaret Atwood",
-    citation: "Oryx and Crake",
-    year: "2003",
-    tag: "literary"
   }
 ];
 
