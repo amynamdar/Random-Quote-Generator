@@ -163,22 +163,6 @@ function setRandomBackgroundColor() {
 
   let randomHexColor = `#${Math.random().toString(16).substring(2, 6)}`
   document.body.style.backgroundColor = randomHexColor;
-
-
-  if (randomQuote.year != "") {
-    let yearHTML = `<span class="year">${randomQuote.year}</span>`;
-    quoteHTML += yearHTML;
-  }
-
-  if (randomQuote.tag != "") {
-    let tagHTML = `<span class="tag">${randomQuote.tag}</span>`;
-    quoteHTML += tagHTML;
-  }
-
-  quoteHTML += "</p>"
-
-  document.getElementById('quote-box').innerHTML = quoteHTML;
-
 }
 
 /** Call printQuote function
