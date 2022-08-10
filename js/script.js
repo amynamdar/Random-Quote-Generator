@@ -6,7 +6,7 @@ Author: Amy Namdar
 /*** 
  * `quotes` array 
  * 
- * Array which holds quote objects containing properties quote, source, citation, and year
+ * Array which holds quote objects, each containing properties: quote, source, citation, year, and tag
  *
 ***/
 
@@ -48,21 +48,26 @@ const quotes = [
     tag: "literary"
   },
   {
-      quote: `I am awaiting
+    quote: `I am awaiting
   </br> perpetually and forever
   </br> a renaissance of wonder`,
-      source: "Lawrence Ferlinghetti",
-      citation: "A Coney Island of the Mind",
-      year: "1958",
-      tag: "poetry"
-  }
+    source: "Lawrence Ferlinghetti",
+    citation: "A Coney Island of the Mind",
+    year: "1958",
+    tag: "poetry"
+  },
+  {
+    quote: `Test Quote`,
+    source: "Test Author",
+  },
+
 ];
 
 /***
  * `getRandomQuote` function
  * Function which returns a random quote by generating a random number between 
  * 1-4 and using it as the index of the item (quote) in the quotes array
- * todo: is there a way to ensure random quote is not same as previous?
+ * ? feature idea: check that random quote is not same as previous?
 ***/
 
 function getRandomQuote() {
@@ -86,17 +91,17 @@ function printQuote() {
   let quoteHTML = `<p class="quote">${randomQuote.quote}</p>
 <p class="source">${randomQuote.source}`;
 
-  if (randomQuote.citation != "") {
+  if (randomQuote.citation !== undefined) {
     let citationHTML = `<span class="citation">${randomQuote.citation}</span>`;
     quoteHTML += citationHTML;
   }
 
-  if (randomQuote.year != "") {
+  if (randomQuote.year !== undefined) {
     let yearHTML = `<span class="year">${randomQuote.year}</span>`;
     quoteHTML += yearHTML;
   }
 
-  if (randomQuote.tag != "") {
+  if (randomQuote.tag !== undefined) {
     let tagHTML = `<span class="tag">${randomQuote.tag}</span>`;
     quoteHTML += tagHTML;
   }
@@ -106,6 +111,8 @@ function printQuote() {
   document.getElementById('quote-box').innerHTML = quoteHTML;
 
   setRandomBackgroundColor();
+
+  console.log(document.getElementById('quote-box').innerHTML);
 
 }
 
@@ -117,6 +124,7 @@ function printQuote() {
 
 function refreshQuote() {
 
+  // ? feature idea: shorten/lengthen refresh interval based on number of words in quote
   // The number of words in the random quote - splits quote string into separate words separated by ' ' 
   //let numberOfWords = quote.quote.split(' ').length;
   //console.log(numberOfWords);
@@ -130,11 +138,13 @@ function refreshQuote() {
  * `setRandomBackgroundColor` function
  * Function which updates the background color to a random color by updating the css 
  * body background-color property with the randomly-generated background color
+ * ? feature idea: check that background color is not same as previous?
 ***/
 
 function setRandomBackgroundColor() {
 
-  /***  Generate the random hexadecimal color code adapted from:
+  /***  Generate the random hexadecimal color 
+
   * Adapted from source (my version uses template literal and updates to use 
   * substring method instead of deprecated .substr): 
   * https://dev.to/andylacko/comment/1jmi1
@@ -158,4 +168,3 @@ refreshQuote();
 ***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
-
