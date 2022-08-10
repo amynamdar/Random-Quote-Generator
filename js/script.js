@@ -46,6 +46,15 @@ const quotes = [
     citation: "Oryx and Crake",
     year: "2003",
     tag: "literary"
+  },
+  {
+      quote: `I am awaiting
+  </br> perpetually and forever
+  </br> a renaissance of wonder`,
+      source: "Lawrence Ferlinghetti",
+      citation: "A Coney Island of the Mind",
+      year: "1958",
+      tag: "poetry"
   }
 ];
 
@@ -53,6 +62,7 @@ const quotes = [
  * `getRandomQuote` function
  * Function which returns a random quote by generating a random number between 
  * 1-4 and using it as the index of the item (quote) in the quotes array
+ * todo: is there a way to ensure random quote is not same as previous?
 ***/
 
 function getRandomQuote() {
@@ -100,27 +110,51 @@ function printQuote() {
 }
 
 /***
+ * `refreshQuote` function
+ * Function which generates HTML representation of the quote object and 
+ * inserts it into the quote-box element for display
+***/
+
+function refreshQuote() {
+
+  // The number of words in the random quote - splits quote string into separate words separated by ' ' 
+  //let numberOfWords = quote.quote.split(' ').length;
+  //console.log(numberOfWords);
+
+  // Call the printQuote function every 6000 milliseconds (6 seconds)
+  setInterval(printQuote, 6000);
+
+}
+
+/***
  * `setRandomBackgroundColor` function
  * Function which updates the background color to a random color by updating the css 
  * body background-color property with the randomly-generated background color
 ***/
 
-function setRandomBackgroundColor(){
-  
+function setRandomBackgroundColor() {
+
   /***  Generate the random hexadecimal color code adapted from:
-  * Source: https://css-tricks.com/snippets/javascript/random-hex-color/
+  * Adapted from source (my version uses template literal and updates to use 
+  * substring method instead of deprecated .substr): 
+  * https://dev.to/andylacko/comment/1jmi1
   */
-  let randomHexColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
- document.body.style.backgroundColor = randomHexColor;
+
+  let randomHexColor = `#${Math.random().toString(16).substring(2, 6)}`
+  document.body.style.backgroundColor = randomHexColor;
 }
 
-printQuote(quotes);
+/** Call printQuote function
+*/
+printQuote();
 
+/** Call refreshQuote function - this refreshes the quote and starts the countdown to the next refresh
+*/
+refreshQuote();
 
-
-/***
+/*** 
  * click event listener for the "Show another quote" button
- * 
+ * When the user clicks the "Show another quote" button, this invokes the printQuote function
 ***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
