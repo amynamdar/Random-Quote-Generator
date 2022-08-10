@@ -6,7 +6,7 @@ Author: Amy Namdar
 /*** 
  * `quotes` array 
  * 
- * Array which holds quotes objects containing properties quote, source, citation, and year
+ * Array which holds quote objects containing properties quote, source, citation, and year
  *
 ***/
 
@@ -58,9 +58,9 @@ const quotes = [
 function getRandomQuote() {
   let randomQuoteNumber = Math.floor(Math.random() * (quotes.length));
   let randomQuote = quotes[randomQuoteNumber];
- 
+
   console.log(`The random quote number is ${randomQuoteNumber}. The quote with that index is "${randomQuote.quote} by ${quotes[randomQuoteNumber].source}, ${randomQuote.citation}, ${randomQuote.year}, ${randomQuote.tag}"`);
- 
+
   return randomQuote;
 }
 
@@ -87,35 +87,18 @@ function printQuote() {
   }
 
   if (randomQuote.tag != "") {
-    console.log("has a tag");
-    
-     let tagHTML = `<span class="tag">${randomQuote.tag}</span>`;
+    let tagHTML = `<span class="tag">${randomQuote.tag}</span>`;
     quoteHTML += tagHTML;
   }
 
   quoteHTML += "</p>"
-  setRandomBackgroundColor();
+
   document.getElementById('quote-box').innerHTML = quoteHTML;
-  
+
 }
 
 printQuote(quotes);
 
-/***
- * `setRandomBackgroundColor` function
- * Function which updates the background color to a random color by updating the css 
- * body background-color property with the randomly-generated background color
-***/
-
-function setRandomBackgroundColor(){
-  
-  /***  Generate the random hexadecimal color code adapted from:
-  * Source: https://css-tricks.com/snippets/javascript/random-hex-color/
-  */
-  let randomHexColor = Math.floor(Math.random()*16777215).toString(16);
- document.body.style.backgroundColor = `#${randomHexColor}`;
-  //console.log(document.body.style.background);
-}
 /***
  * click event listener for the "Show another quote" button
  * 
